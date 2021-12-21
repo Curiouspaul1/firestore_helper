@@ -1,0 +1,40 @@
+[
+    {
+        "user_id": "qgL8UkQfXaQMD2NYPNW0",
+        "symbol":"BTCUSDT",
+        "buying_strategy":"climbing-stairs",
+        "selling_strategy":"climbing-stairs",
+        "max_nums":6,
+        "exchange":"binance",
+        "interval":"5m",
+        "indefinite":false,
+        "max_duration":40,
+        "sleep_time":3
+    },
+
+    {
+        "user_id": "qgL8UkQfXaQMD2NYPNW0",
+        "symbol":"BTCUSDT",
+        "buying_strategy":"climbing-stairs",
+        "selling_strategy":"climbing-stairs",
+        "max_nums":6,
+        "exchange":"binance",
+        "interval":"5m",
+        "indefinite":false,
+        "max_duration":40,
+        "sleep_time":3
+    },
+
+    {
+        "user_id": "qgL8UkQfXaQMD2NYPNW0",
+        "symbol":"BTCUSDT",
+        "buying_strategy":"climbing-stairs",
+        "selling_strategy":"climbing-stairs",
+        "max_nums":6,
+        "exchange":"binance",
+        "interval":"5m",
+        "indefinite":false,
+        "max_duration":40,
+        "sleep_time":3
+    }
+]
