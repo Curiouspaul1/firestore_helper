@@ -1,4 +1,5 @@
 from google.cloud import firestore
+from google.cloud.firestore_v1 import base_client
 from google.oauth2 import service_account
 from typing import Dict, List
 import os
@@ -51,17 +52,58 @@ def add_from_file(path_to_file, collection_name) -> Dict:
     if type(data) == list:
         # if this is a list of json objects try to add them
         #  one by one
+        count_ = 0
+        commitCount = 0
+        batches_ = []
+        batches_.append(db.batch())
         for obj in data:
-            add_ = add_from_object(data=obj, collection_name=collection_name)
-            print(add_)
+            if count_ <= 499:
+                _insert = db.collection(u'{}'.format(collection_name)).document(
+                str(uuid.uuid4())
+                )
+                batches_[commitCount].set(_insert, obj)
+                count_ += 1
+            else:
+                print(count_)
+                print(commitCount)
+                count_ = 0
+                commitCount += 1
+                batches_.append(db.batch())
+        for batch in batches_:
+            batch.commit()
+        return {
+            "status": "success",
+            "data": result
+        }
     else:
         #  searches for an entry point to the list 
         #  of json objects in this case it assumes that
         #  a key of 'data' exists in the json file, that maps to an array of
         #  objects
+        count_ = 0
+        commitCount = 0
+        batches_ = []
+        batches_.append(db.batch())
         for obj in data['data']:
-            add_ = add_from_object(data=obj, collection_name=collection_name)
-            print(add_)
+            if count_ <= 499:
+                _insert = db.collection(u'{}'.format(collection_name)).document(
+                str(uuid.uuid4())
+                )
+                batches_[commitCount].set(_insert, obj)
+                count_ += 1
+            else:
+                print(count_)
+                print(commitCount)
+                count_ = 0
+                commitCount += 1
+                batches_.append(db.batch())
+        for batch in batches_:
+            batch.commit()
+        return {
+            "status": "success",
+            "data": result
+        }
+
 
 
 def fetch_one(collection_name, **kwargs):
